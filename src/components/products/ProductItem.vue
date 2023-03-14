@@ -1,20 +1,19 @@
 <template>
   <div class="product">
-    <div class="product__field product__name">
-      {{ product_data.title }}
-    </div>
-    <div class="product__field product__type">
-      {{ product_data.type }}
-    </div>
-    <div class="product__field product__guarantee">
-      {{ product_data.guarantee }}
-    </div>
-    <div class="product__field product__price">
-      {{ product_data.price }}
-    </div>
-    <div class="product__field product__arrival">
-      {{ product_data.date }}
-    </div>
+    <p>
+      Название продукта: <strong>{{ product_data.title }}</strong>
+    </p>
+    <p>
+      Тип продукта: <strong>{{ product_data.type }}</strong>
+    </p>
+    <p>
+      Гарантия действительна <strong>{{ getGuarantee }}</strong>
+    </p>
+    <p>
+      Цена: <strong>{{ getPrice("UAH") }}</strong> /
+      <strong>{{ getPrice("USD") }}</strong>
+    </p>
+    <p>Название прихода: <strong>Приход</strong></p>
   </div>
 </template>
 
@@ -34,9 +33,43 @@ export default {
     return {};
   },
   computed: {
+    getGuarantee() {
+      var options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        timezone: "UTC",
+      };
+      let start = new Date(this.product_data.guarantee.start);
+      let end = new Date(this.product_data.guarantee.end);
+
+      return (
+        start.toLocaleString("ru", options) +
+        " - " +
+        end.toLocaleString("ru", options) +
+        "(" +
+        start.toLocaleString("en", options) +
+        " - " +
+        end.toLocaleString("en", options) +
+        ")"
+      );
+    },
     ...mapGetters(["PRODUCTS"]),
   },
-  methods: {},
+  methods: {
+    getPrice(currency) {
+      let price;
+      this.product_data.price.map((item) => {
+        if (item.symbol === currency) {
+          price = item.value;
+        }
+      });
+
+      let parts = price.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return parts.join(".") + " " + currency;
+    },
+  },
   mounted() {},
 };
 </script>
@@ -47,13 +80,5 @@ export default {
   border-radius: 10px;
   border: 1px solid teal;
   gap: 20px;
-
-  &__field {
-    white-space: nowrap;
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 15px;
-  }
 }
 </style>

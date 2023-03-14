@@ -1,15 +1,15 @@
 <template>
   <div class="order">
     <div class="order__info">
-      <div class="order__field order__name">
-        {{ order_data.title }}
-      </div>
-      <div class="order__field order__arrival">
-        {{ order_data.date }}
-      </div>
-      <div class="order__field order__description">
-        {{ order_data.description }}
-      </div>
+      <p>
+        Название прихода: <strong>{{ order_data.title }}</strong>
+      </p>
+      <p>
+        Дата прихода: <strong>{{ getDate }}</strong>
+      </p>
+      <p>
+        Описание прихода: <strong>{{ order_data.description }}</strong>
+      </p>
     </div>
     <div class="order__buttons">
       <my-button @click="showOrderDetails"> Показать детали </my-button>
@@ -50,7 +50,24 @@ export default {
       isDialogVisible: false,
     };
   },
-  computed: {},
+  computed: {
+    getDate() {
+      var options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        timezone: "UTC",
+      };
+      let date = new Date(this.order_data.date);
+
+      return (
+        date.toLocaleString("ru", options) +
+        "(" +
+        date.toLocaleString("en", options) +
+        ")"
+      );
+    },
+  },
   methods: {
     showOrderDetails() {
       this.$emit("showOrderDetails", this.order_data);
@@ -72,8 +89,6 @@ export default {
 
 <style lang="scss">
 .order {
-  display: flex;
-  align-items: center;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid teal;
@@ -98,8 +113,7 @@ export default {
   }
 
   &__info {
-    display: flex;
-    gap: 0 10px;
+    margin-bottom: 10px;
   }
 
   &__buttons {

@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <header-component />
-    <main class="main">
+    <div class="wrapper">
       <aside class="aside">
         <div class="profile">
           <img src="./assets/images/profile.jpg" alt="profile">
@@ -14,13 +14,15 @@
           <router-link class="nav__link" to="/settings">Настройки</router-link>
         </nav>
       </aside>
-      <router-view />
-    </main>
+      <main class="main">
+        <router-view />
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
-import HeaderComponent from '@/components/HeaderComponent.vue';
+import HeaderComponent from '@/components/header/HeaderComponent.vue';
 export default {
   components: {
     HeaderComponent
@@ -29,13 +31,18 @@ export default {
 </script>
 
 <style lang="scss">
-.main {
+.wrapper {
   display: flex;
   flex: 1 1 auto;
 }
 
+.main {
+  flex: 0 1 100%;
+  padding: 20px;
+}
+
 .aside {
-  box-shadow: 0 10px 20px rgba($color: #000000, $alpha: 0.5);
+  box-shadow: 0 10px 20px rgba(#000000, 0.5);
   padding: 100px 40px;
 }
 

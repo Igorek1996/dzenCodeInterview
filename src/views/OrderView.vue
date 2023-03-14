@@ -16,32 +16,35 @@
           />
         </transition-group>
       </div>
-      <div v-if="Object.keys(ourOrder).length !== 0" class="orders__products">
-        <div class="orders__products-close">
-          <my-button @click="closeDetails">
-            <span class="material-icons"> close </span>
-          </my-button>
+      <transition-group name="orders__list-items">
+        <div v-if="Object.keys(ourOrder).length !== 0" class="orders__products">
+          <div class="orders__products-close">
+            <my-button @click="closeDetails">
+              <span class="material-icons"> close </span>
+            </my-button>
+          </div>
+          <div class="orders__products-info">
+            <p>
+              Название заказа: <strong>{{ ourOrder.title }}</strong>
+            </p>
+            <p>
+              Колличество продуктов:
+              <strong>{{ ourOrder.products.length }}</strong>
+            </p>
+
+            <p>
+              Дата создания прихода: <strong>{{ getDate }}</strong>
+            </p>
+            <p>
+              Сумма:
+              <strong>
+                {{ getPrice("UAH") }} /
+                {{ getPrice("USD") }}
+              </strong>
+            </p>
+          </div>
         </div>
-        <div class="orders__products-info">
-          <p>
-            Название заказа: <strong>{{ ourOrder.title }}</strong>
-          </p>
-          <p>
-            Колличество продуктов:
-            <strong>{{ ourOrder.products.length }}</strong>
-          </p>
-          <p>
-            Дата создания прихода: <strong>{{ ourOrder.date }}</strong>
-          </p>
-          <p>
-            Сумма:
-            <strong>
-              {{ getPrice("UAH") }} /
-              {{ getPrice("USD") }}
-            </strong>
-          </p>
-        </div>
-      </div>
+      </transition-group>
     </div>
     <div div v-else class="orders__message">
       <p>Список приходов пуст!</p>
@@ -65,14 +68,28 @@ export default {
     };
   },
   computed: {
+    getDate() {
+      var options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        timezone: "UTC",
+      };
+      let date = new Date(this.ourOrder.date);
+
+      return (
+        date.toLocaleString("ru", options) +
+        "(" +
+        date.toLocaleString("en", options) +
+        ")"
+      );
+    },
     ...mapGetters(["ORDERS"]),
   },
   methods: {
     getPrice(currency) {
       let arr = [];
-      let prices = this.ourOrder.products.map((product) => {
-        return product.price;
-      });
+      let prices = this.ourOrder.products.map((product) => product.price);
 
       prices.flat(2).forEach((item) => {
         if (item.symbol === currency) {
@@ -118,7 +135,7 @@ export default {
     }
     &-items-enter-active,
     &-items-leave-active {
-      transition: all 0.3s ease;
+      transition: all 0.1s ease;
     }
     &-items-enter-from,
     &-items-leave-to {
@@ -131,8 +148,6 @@ export default {
   }
 
   &__row {
-    display: flex;
-    align-items: center;
     gap: 0 20px;
   }
 

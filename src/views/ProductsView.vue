@@ -54,7 +54,9 @@ export default {
 <style lang="scss">
 .products {
   &__list {
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 
     &-items-item {
       display: inline-block;

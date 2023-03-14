@@ -1,9 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 html,
 body {
     font-family: $font_main;
     font-size: $size;
     line-height: 1;
     height: 100%;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .app {

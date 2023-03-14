@@ -39,6 +39,8 @@ export default {
 
 <style lang="scss">
 .date {
+    white-space: nowrap;
+
     &__row {
         display: flex;
         align-items: center;

@@ -6,8 +6,17 @@ export default createStore({
     products: products,
     orders: orders,
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    REMOVE_ORDER: (state, id) => {
+      const index = state.orders.findIndex((item) => item.id === id);
+      state.orders.splice(index, 1);
+    },
+  },
+  actions: {
+    REMOVE_ORDER({ commit }, id) {
+      commit("REMOVE_ORDER", id);
+    },
+  },
   getters: {
     PRODUCTS(state) {
       return state.products;

@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ArrivalView from "../views/ArrivalView.vue";
+import OrderView from "../views/OrderView.vue";
 
 const routes = [
   {
     path: "/",
-    name: "ArrivalView",
-    component: ArrivalView,
+    name: "OrderView",
+    component: OrderView,
   },
   {
     path: "/groups",

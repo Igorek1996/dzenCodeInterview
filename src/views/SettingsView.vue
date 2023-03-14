@@ -1,17 +1,10 @@
 <template>
-    <div class="settings">
-        This is settings page
-    </div>
+  <div class="settings">This is settings page</div>
 </template>
-  
+
 <script>
-// @ is an alias to /src
-
 export default {
-    name: 'SettingslView',
-    components: {
-
-    }
-}
+  name: "SettingslView",
+  components: {},
+};
 </script>
-  

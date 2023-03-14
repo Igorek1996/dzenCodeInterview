@@ -5,13 +5,13 @@
         </p>
         <div class="date__row">
             <p>
-                {{ new Date().getDate() + " " + getMonthDay() + " " + new Date().getFullYear() }}
+                {{ getCurrentDate }}
             </p>
             <p>
                 <span class="material-icons">
                     schedule
                 </span>
-                {{ new Date().getHours() + ":" + new Date().getMinutes() }}
+                {{ getCurrentTime }}
             </p>
         </div>
     </div>
@@ -20,7 +20,10 @@
 <script>
 export default {
     data() {
-        return {}
+        return {
+            getCurrentDate: '',
+            getCurrentTime: ''
+        }
     },
     methods: {
         getWeekDay() {
@@ -32,8 +35,16 @@ export default {
             const date = new Date();
             let monthes = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь'];
             return monthes[date.getMonth()];
+        },
+        setTime() {
+            this.getCurrentDate = new Date().getDate() + " " + this.getMonthDay() + " " + new Date().getFullYear()
+            this.getCurrentTime = ('0' + new Date().getHours()).slice(-2) + ":" + ('0' + new Date().getMinutes()).slice(-2) + ":" + ('0' + new Date().getSeconds()).slice(-2)
         }
-    }
+    },
+    mounted() {
+        setInterval(() => this.setTime(), 1000)
+    },
+
 }
 </script>
 

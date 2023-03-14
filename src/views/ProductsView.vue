@@ -2,15 +2,16 @@
   <div class="products">
     <div class="products__row">
       <h1>Продукты / {{ PRODUCTS.length }}</h1>
-      <my-button> Elfkbnm </my-button>
       <my-select v-model="selectedSort" :options="sortOptions" />
     </div>
     <div v-if="PRODUCTS.length" class="products__list">
-      <product-item
-        v-for="product in sortedProducts"
-        :key="product.id"
-        :product_data="product"
-      />
+      <transition-group name="products__list-items">
+        <product-item
+          v-for="product in sortedProducts"
+          :key="product.id"
+          :product_data="product"
+        />
+      </transition-group>
     </div>
     <div v-else class="products__message">Список продуктов пуст!</div>
   </div>
@@ -54,6 +55,23 @@ export default {
 .products {
   &__list {
     overflow-x: auto;
+
+    &-items-item {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    &-items-enter-active,
+    &-items-leave-active {
+      transition: all 1s ease;
+    }
+    &-items-enter-from,
+    &-items-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    &-items-move {
+      transition: transform 0.8s ease;
+    }
   }
 
   &__row {

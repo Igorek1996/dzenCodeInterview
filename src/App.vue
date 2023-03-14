@@ -4,10 +4,10 @@
     <div class="wrapper">
       <aside class="aside">
         <div class="profile">
-          <img src="./assets/images/profile.jpg" alt="profile">
+          <img src="./assets/images/profile.jpg" alt="profile" />
         </div>
         <nav class="nav">
-          <router-link class="nav__link active" to="/">Приход</router-link>
+          <router-link class="nav__link" to="/">Приход</router-link>
           <router-link class="nav__link" to="/groups">Группы</router-link>
           <router-link class="nav__link" to="/products">Продукты</router-link>
           <router-link class="nav__link" to="/users">Пользователи</router-link>
@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/header/HeaderComponent.vue';
+import HeaderComponent from "@/components/header/HeaderComponent.vue";
 export default {
   components: {
-    HeaderComponent
-  }
-}
+    HeaderComponent,
+  },
+};
 </script>
 
 <style lang="scss">
@@ -53,9 +53,13 @@ export default {
   gap: 20px;
 
   &__link {
+    border-bottom: 2px solid transparent;
     padding-bottom: 5px;
+    &:hover {
+      border-bottom: 2px solid teal;
+    }
 
-    &.active {
+    &.router-link-exact-active {
       border-bottom: 2px solid teal;
     }
   }

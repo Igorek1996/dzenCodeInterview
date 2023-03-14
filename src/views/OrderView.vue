@@ -5,14 +5,16 @@
     </div>
     <div class="orders__wrapper" v-if="ORDERS.length">
       <div class="orders__list">
-        <order-item
-          v-for="order in ORDERS"
-          :key="order.id"
-          :order_data="order"
-          @showOrderDetails="showDetails"
-          :class="{ order_expanded: isExpanded }"
-          @remove="removeOrder"
-        />
+        <transition-group name="orders__list-items">
+          <order-item
+            v-for="order in ORDERS"
+            :key="order.id"
+            :order_data="order"
+            @showOrderDetails="showDetails"
+            :class="{ order_expanded: isExpanded }"
+            @remove="removeOrder"
+          />
+        </transition-group>
       </div>
       <div v-if="Object.keys(ourOrder).length !== 0" class="orders__products">
         <div class="orders__products-close">
@@ -110,7 +112,22 @@ export default {
 
   &__list {
     flex: 0 1 100%;
-    overflow-x: auto;
+    &-items-item {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    &-items-enter-active,
+    &-items-leave-active {
+      transition: all 0.3s ease;
+    }
+    &-items-enter-from,
+    &-items-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    &-items-move {
+      transition: transform 0.8s ease;
+    }
   }
 
   &__row {

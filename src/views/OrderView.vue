@@ -43,6 +43,13 @@
               </strong>
             </p>
           </div>
+          <div class="orders__products-list">
+            <order-product
+              v-for="item in ourOrder.products"
+              :key="item.id"
+              :order_product="item"
+            />
+          </div>
         </div>
       </transition-group>
     </div>
@@ -55,11 +62,13 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import OrderItem from "@/components/orders/OrderItem.vue";
+import OrderProduct from "@/components/orders/OrderProduct.vue";
 
 export default {
   name: "OrderView",
   components: {
     OrderItem,
+    OrderProduct,
   },
   data() {
     return {
@@ -115,8 +124,9 @@ export default {
       this.REMOVE_ORDER(id);
       this.closeDetails();
     },
-    ...mapActions(["REMOVE_ORDER"]),
+    ...mapActions(["REMOVE_ORDER", "REMOVE_PRODUCT_FROM_ORDER"]),
   },
+  mounted() {},
 };
 </script>
 
@@ -154,10 +164,16 @@ export default {
   &__products {
     flex: 0 0 50%;
     padding: 10px;
-    border: 2px solid teal;
+    border: 2px solid $color_main;
 
     &-close {
       text-align: right;
+    }
+
+    &-list {
+      border-top: 2px solid $color_main;
+      padding-top: 10px;
+      margin-top: 10px;
     }
   }
 }

@@ -33,7 +33,7 @@ export default {
 <style lang="scss">
 .input {
   width: 100%;
-  border: 2px solid teal;
+  border: 2px solid $color_main;
   padding: 10px;
 }
 </style>

@@ -4,6 +4,11 @@ import OrderView from "../views/OrderView.vue";
 const routes = [
   {
     path: "/",
+    name: "settings",
+    component: () => import("../views/SettingsView.vue"),
+  },
+  {
+    path: "/orders",
     name: "OrderView",
     component: OrderView,
   },
@@ -13,19 +18,14 @@ const routes = [
     component: () => import("../views/GroupsView.vue"),
   },
   {
-    path: "/products",
-    name: "products",
+    path: "/order/:orderId",
+    name: "order",
     component: () => import("../views/ProductsView.vue"),
   },
   {
     path: "/users",
     name: "users",
     component: () => import("../views/UsersView.vue"),
-  },
-  {
-    path: "/settings",
-    name: "settings",
-    component: () => import("../views/SettingsView.vue"),
   },
 ];
 

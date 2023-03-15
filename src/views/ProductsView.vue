@@ -1,15 +1,16 @@
 <template>
   <div class="products">
     <div class="products__row">
-      <h1>Продукты / {{ PRODUCTS.length }}</h1>
+      <h1>Продукты / {{ sortedProducts.length }}</h1>
       <my-select v-model="selectedSort" :options="sortOptions" />
     </div>
-    <div v-if="PRODUCTS.length" class="products__list">
+    <div v-if="sortedProducts.length" class="products__list">
       <transition-group name="products__list-items">
         <product-item
           v-for="product in sortedProducts"
           :key="product.id"
           :product_data="product"
+          :order="getOrder"
         />
       </transition-group>
     </div>
@@ -36,17 +37,22 @@ export default {
     };
   },
   computed: {
+    getOrder() {
+      const order = this.ORDERS.find(
+        (order) => order.id == this.$route.params.orderId
+      );
+      return order;
+    },
     sortedProducts() {
-      return [...this.PRODUCTS].sort((a, b) => {
+      return [...this.getOrder.products].sort((a, b) => {
         if (this.selectedSort !== "") {
           return a[this.selectedSort.toLocaleLowerCase()].localeCompare(
             b[this.selectedSort].toLocaleLowerCase()
           );
         }
-        return this.PRODUCTS;
       });
     },
-    ...mapGetters(["PRODUCTS"]),
+    ...mapGetters(["ORDERS"]),
   },
 };
 </script>

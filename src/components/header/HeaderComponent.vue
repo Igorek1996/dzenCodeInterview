@@ -5,11 +5,7 @@
         <router-link to="/" class="header__logo">
           <img src="../../assets/logo.png" alt="logo" />
         </router-link>
-        <my-input
-          type="search"
-          placeholder="Поиск"
-          v-model="PRODUCTS.title"
-        ></my-input>
+        <my-input type="search" placeholder="Поиск"></my-input>
         <date-component />
       </div>
     </div>
@@ -17,14 +13,10 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import DateComponent from "@/components/header/DateComponent.vue";
 export default {
   components: {
     DateComponent,
-  },
-  computed: {
-    ...mapGetters(["PRODUCTS"]),
   },
 };
 </script>

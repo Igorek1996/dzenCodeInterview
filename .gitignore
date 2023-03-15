@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-tz
 package-lock.json
 /dist
 

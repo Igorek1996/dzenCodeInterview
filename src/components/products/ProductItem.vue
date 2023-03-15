@@ -13,7 +13,9 @@
       Цена: <strong>{{ getPrice("UAH") }}</strong> /
       <strong>{{ getPrice("USD") }}</strong>
     </p>
-    <p>Название прихода: <strong>Приход</strong></p>
+    <p>
+      Название прихода: <strong>{{ order.title }}</strong>
+    </p>
   </div>
 </template>
 
@@ -23,6 +25,12 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     product_data: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    order: {
       type: Object,
       default() {
         return {};
@@ -54,7 +62,7 @@ export default {
         ")"
       );
     },
-    ...mapGetters(["PRODUCTS"]),
+    ...mapGetters(["ORDERS"]),
   },
   methods: {
     getPrice(currency) {
@@ -78,7 +86,7 @@ export default {
 .product {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid teal;
+  border: 1px solid $color_main;
   gap: 20px;
 }
 </style>

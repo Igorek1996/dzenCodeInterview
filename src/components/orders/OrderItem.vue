@@ -16,6 +16,11 @@
       <my-button @click="openDialog" class="btn__remove">
         Удалить приход
       </my-button>
+      <router-link
+        class="btn"
+        :to="{ name: 'order', params: { orderId: order_data.id } }"
+        >Перейти на приход
+      </router-link>
     </div>
     <my-dialog
       :isShow="isDialogVisible"
@@ -91,7 +96,7 @@ export default {
 .order {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid teal;
+  border: 1px solid $color_main;
   gap: 20px;
 
   &_expanded {
@@ -118,6 +123,7 @@ export default {
 
   &__buttons {
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 0 10px;
     margin-left: auto;
@@ -138,7 +144,7 @@ export default {
       width: 500px;
       background: #fff;
       padding: 10px;
-      border: 2px solid teal;
+      border: 2px solid $color_main;
       border-radius: 10px;
     }
 

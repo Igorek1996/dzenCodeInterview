@@ -1,9 +1,8 @@
 import { createStore } from "vuex";
-import { orders, products } from "../../tz/front-end-data.json";
+import { orders } from "../../tz/front-end-data.json";
 
 export default createStore({
   state: {
-    products: products,
     orders: orders,
   },
   mutations: {
@@ -13,14 +12,11 @@ export default createStore({
     },
   },
   actions: {
-    REMOVE_ORDER({ commit }, id) {
-      commit("REMOVE_ORDER", id);
+    REMOVE_ORDER({ commit }, productId, orderID) {
+      commit("REMOVE_ORDER", productId, orderID);
     },
   },
   getters: {
-    PRODUCTS(state) {
-      return state.products;
-    },
     ORDERS(state) {
       return state.orders;
     },

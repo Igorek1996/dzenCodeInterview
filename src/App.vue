@@ -7,11 +7,10 @@
           <img src="./assets/images/profile.jpg" alt="profile" />
         </div>
         <nav class="nav">
-          <router-link class="nav__link" to="/">Приход</router-link>
+          <router-link class="nav__link" to="/orders">Приход</router-link>
           <router-link class="nav__link" to="/groups">Группы</router-link>
-          <router-link class="nav__link" to="/products">Продукты</router-link>
           <router-link class="nav__link" to="/users">Пользователи</router-link>
-          <router-link class="nav__link" to="/settings">Настройки</router-link>
+          <router-link class="nav__link" to="/">Настройки</router-link>
         </nav>
       </aside>
       <main class="main">
@@ -56,11 +55,11 @@ export default {
     border-bottom: 2px solid transparent;
     padding-bottom: 5px;
     &:hover {
-      border-bottom: 2px solid teal;
+      border-bottom: 2px solid $color_main;
     }
 
     &.router-link-exact-active {
-      border-bottom: 2px solid teal;
+      border-bottom: 2px solid $color_main;
     }
   }
 }

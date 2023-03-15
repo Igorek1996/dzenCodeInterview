@@ -16,13 +16,13 @@ export default {
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
-  background: teal;
+  background: $color_main;
   color: #ffffff;
   transition: 0.2s;
   line-height: 1;
 
   &:hover {
-    background: rgba(teal, 0.5);
+    background: rgba($color_main, 0.5);
   }
 
   &__remove {

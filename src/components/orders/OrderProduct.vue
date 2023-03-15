@@ -13,7 +13,6 @@
       <strong>{{ getPrice("UAH") }}</strong> /
       <strong>{{ getPrice("USD") }}</strong>
     </div>
-    <my-button class="btn__remove"> Удалить продукт </my-button>
   </div>
 </template>
 

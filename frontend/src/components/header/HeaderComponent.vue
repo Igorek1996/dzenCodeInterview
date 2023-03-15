@@ -16,7 +16,7 @@
 <script>
 import io from "socket.io-client";
 import DateComponent from "@/components/header/DateComponent.vue";
-const socket = io("https://backendtest.netlify.app");
+const socket = io("http://localhost:3000");
 export default {
   components: {
     DateComponent,
